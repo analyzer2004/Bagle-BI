@@ -1,0 +1,51 @@
+﻿        /*
+ var combine = function(a) {
+ var fn = function(n, src, got, all) {
+    if (n == 0) {
+      if (got.length > 0) {
+        all[all.length] = got;
+      }
+      return;
+    }
+    for (var j = 0; j < src.length; j++) {
+      fn(n - 1, src.slice(j + 1), got.concat([src[j]]), all);
+    }
+    return;
+  }
+  var all = [];
+  for (var i=0; i < a.length; i++) {
+    fn(i, a, [], all);
+  }
+  all.push(a);
+  return all;
+}
+
+var a = combine(['a','b','c','d']);
+*/
+        private List<Attribute[]> Permutate(Attribute[] attrs)
+        {
+            List<Attribute[]> list = new List<Attribute[]>();            
+            for (int i = 0; i < attrs.Length; i++)
+            {                
+                f(i, attrs, new Attribute[] { }, list);
+            }
+            list.Insert(0, attrs);
+            return list;
+
+            void f(int n, Attribute[] src, Attribute[] got, List<Attribute[]> all)
+            {
+                if (n == 0)
+                {
+                    if (got.Length > 0)
+                    {
+                        all.Add(got);
+                    }
+                    return;
+                }
+                for (int j = 0; j < src.Length; j++)
+                {   
+                    f(n - 1, src.Take(j + 1).ToArray(), got.Concat(new Attribute[] { src[j] }).ToArray(), all);
+                }
+                return;
+            }
+        }
